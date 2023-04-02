@@ -1,0 +1,71 @@
+syntax="proto3";
+
+
+
+service activateservers{
+    rpc register(connectrequest) returns(connectreply){}
+    rpc informprimaryreplica(newreplica) returns(informstatus){}
+    rpc getserverlist(serverlistrequest) returns(serverlist){}
+    rpc writefile(writerequest) returns(filestatus){}
+    rpc readfile(readrequest) returns(filecontent){}
+    rpc sendtoprimary(writerequest) returns(confirm){}
+    rpc sendall(writerequest) returns(confirm){}
+    rpc delete(deleterequest) returns(deletereply){}
+    rpc senddeltoprime(deleterequest) returns(deletereply){}
+    rpc senddelall(deleterequest) returns(deletereply){}
+}
+
+message deleterequest{
+    optional string id=1;
+}
+message deletereply{
+    optional string reply=1;
+}
+message confirm{
+    optional string reply=1;
+ }
+message connectrequest{
+   optional string serveraddress=1;
+}
+message connectreply{
+   optional string reply=1;
+}
+message newreplica{
+    optional string replicaaddress=1;
+}
+message informstatus{
+    optional string done=1;
+}
+message serverlistrequest{
+    optional string clientaddress=1;
+ }
+message serverlist{
+    repeated string items=1;
+}
+message writerequest{
+    optional string filename=1;
+    optional string uuid=2;
+    optional string content=3;
+}
+message filestatus{
+    optional string status=1;
+    optional string uid=2;
+    float timestamp=3;
+}
+
+message readrequest{
+    optional string id=1;
+}
+message filecontent{
+    optional string readstatus=1;
+    optional string filename=2;
+    optional string contents=3;
+    float version=4;
+}
+
+
+
+
+
+
+
